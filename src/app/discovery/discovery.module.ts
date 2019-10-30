@@ -6,12 +6,14 @@ import { RouterModule } from '@angular/router';
 
 import { DiscoveryPage } from './discovery.page';
 import { ComponentsModule } from '../components/components.module';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   imports: [
     CommonModule,
     FormsModule,
     IonicModule,
+    HttpClientModule,
     RouterModule.forChild([
       {
         path: '',
@@ -22,4 +24,4 @@ import { ComponentsModule } from '../components/components.module';
   ],
   declarations: [DiscoveryPage]
 })
-export class DiscoveryPageModule {}
+export class DiscoveryPageModule { }

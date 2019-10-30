@@ -11,7 +11,6 @@ import {
   ViewEncapsulation
 } from '@angular/core';
 import { ControlValueAccessor, NG_VALUE_ACCESSOR } from "@angular/forms";
-
 import { Platform } from '@ionic/angular';
 import { TAG_COLORS } from "./colors";
 
@@ -59,12 +58,13 @@ export const CITY_PICKER_VALUE_ACCESSOR: any = {
   ]
 })
 export class IonTagsInput implements ControlValueAccessor, OnInit {
+  
   _once: boolean = false;
   @Input() mode: string = '';
   @Input() readonly: boolean = false;
   @Input() hideRemove: boolean = false;
   @Input() maxTags: number = -1;
-  @Input() placeholder: string = '#searchtags';
+  @Input() placeholder: string = '+Tag';
   @Input() type: string = 'text';
   @Input() separatorStr: string = ',';
   @Input() canEnterAdd: boolean = true;
@@ -88,9 +88,9 @@ export class IonTagsInput implements ControlValueAccessor, OnInit {
 
 
   @Output() onChange: EventEmitter<any> = new EventEmitter();
-  @Output() ionFocus: EventEmitter<any> = new EventEmitter();
-  @Output() ionBlur: EventEmitter<any> = new EventEmitter();
-  @ViewChild('tagsInput', {static: false}) input: any;
+  @Output() onFocus: EventEmitter<any> = new EventEmitter();
+  @Output() onBlur: EventEmitter<any> = new EventEmitter();
+  @ViewChild('tagsInput', { static: false }) input: any;
 
   _editTag: string = '';
   _tags: Array<string> = [];
@@ -211,7 +211,7 @@ export class IonTagsInput implements ControlValueAccessor, OnInit {
   public blur(): any {
     if (this._isFocus) {
       this._isFocus = false;
-      this.ionBlur.emit(this._tags);
+      this.onBlur.emit(this._tags);
     }
   }
 
@@ -219,7 +219,7 @@ export class IonTagsInput implements ControlValueAccessor, OnInit {
     if (!this._isFocus) {
       this._isFocus = true;
       this.input.nativeElement.focus();
-      this.ionFocus.emit(this._tags);
+      this.onFocus.emit(this._tags);
     }
   }
 
@@ -246,6 +246,5 @@ export class IonTagsInput implements ControlValueAccessor, OnInit {
   initMode(): any {
     this.mode = this.plt.is('ios') ? 'ios' : this.plt.is('android') ? 'md' : 'md';
   }
-
 }
 

@@ -18,49 +18,36 @@
   <ion-toolbar>
     <div class="search-box">
       <ion-tags-input #tagsInput [(ngModel)]="items" (ionFocus)="onFocus($event)" (ionBlur)="onBlur($event)"
-        (onChange)="onChange($event)">
+        (onChange)="searchChanged($event)">
       </ion-tags-input>
       <ion-icon name="search"></ion-icon>
     </div>
+    <div class="update-box">
+
+    </div>
     <ion-title size="small" class="suggestion-title">You may also search for</ion-title>
     <ion-slides scrollbar="true" pager="false" [options]="slideOpts">
-      <ion-slide>
-        <ion-chip class="suggestions">
-          <ion-label color="dark">#flatshoes</ion-label>
-          <ion-label color="dark">16k posts</ion-label>
-        </ion-chip>
-      </ion-slide>
-      <ion-slide>
-        <ion-chip class="suggestions">
-          <ion-label color="dark">#heels</ion-label>
-          <ion-label color="dark">16k posts</ion-label>
-        </ion-chip>
-      </ion-slide>
-      <ion-slide>
-        <ion-chip class="suggestions">
-          <ion-label color="dark">#redshoes</ion-label>
-          <ion-label color="dark">16k posts</ion-label>
-        </ion-chip>
-      </ion-slide>
-      <ion-slide>
-        <ion-chip class="suggestions">
-          <ion-label color="dark">#sportshoes</ion-label>
-          <ion-label color="dark">16k posts</ion-label>
+      <ion-slide *ngFor="let item of latestResults; let i=index">
+        <ion-chip class="suggestions" *ngIf="i<4">
+          <ion-label color="dark" class="wrap-text">#{{item.tags}}</ion-label>
+          <ion-label color="dark">{{item.downloads}}</ion-label>
         </ion-chip>
       </ion-slide>
     </ion-slides>
-    <ion-grid>
-      <ion-row class="ion-text-center analytics-data">
-        <ion-col>
-          <ion-title>200K</ion-title>
-          <p>Number of people talking about #fashion, #shoes</p>
-        </ion-col>
-        <ion-col>
-          <ion-title>20K</ion-title>
-          <p>Number of kofluence influencers talking about #fashion, #shoes</p>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
+    <div *ngFor="let item of latestResults; let i=index">
+      <ion-grid *ngIf="i<1">
+        <ion-row class="ion-text-center analytics-data">
+          <ion-col>
+            <ion-title>{{item.downloads}}</ion-title>
+            <p>Number of people talking about {{item.tags}}</p>
+          </ion-col>
+          <ion-col>
+            <ion-title>{{item.favorites}}</ion-title>
+            <p>Number of kofluence influencers talking about {{item.tags}}</p>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </div>
     <ion-segment (ionChange)="segmentChanged($event)" class="postsList" [(ngModel)]="postsList" mode="md"
       color="warning">
       <ion-segment-button checked mode="md" value="topPosts">
@@ -74,29 +61,16 @@
       <ion-list *ngSwitchCase="'topPosts'">
         <ion-grid>
           <ion-row>
-            <ion-col size="6" class="post-item">
-              <ion-img src="../../assets/post1.png"></ion-img>
+            <ion-col size="6" class="post-item" *ngFor="let item of (results | async)">
+              <ion-img [src]=item.previewURL></ion-img>
               <div class="views-likes">
                 <div class="views">
                   <ion-icon name="eye"></ion-icon>
-                  <span>10000</span>
+                  <span>{{item.views}}</span>
                 </div>
                 <div class="likes">
                   <ion-icon name="heart"></ion-icon>
-                  <span>10000</span>
-                </div>
-              </div>
-            </ion-col>
-            <ion-col size="6" class="post-item">
-              <ion-img src="../../assets/post1.png"></ion-img>
-              <div class="views-likes">
-                <div class="views">
-                  <ion-icon name="eye"></ion-icon>
-                  <span>10000</span>
-                </div>
-                <div class="likes">
-                  <ion-icon name="heart"></ion-icon>
-                  <span>10000</span>
+                  <span>{{item.likes}}</span>
                 </div>
               </div>
             </ion-col>
@@ -105,30 +79,17 @@
       </ion-list>
       <ion-list *ngSwitchCase="'latestPosts'">
         <ion-grid>
-          <ion-row>
-            <ion-col size="6" class="post-item">
-              <ion-img src="../../assets/post1.png"></ion-img>
+          <ion-row id="latestPosts">
+            <ion-col size="6" class="post-item" *ngFor="let item of latestResults">
+              <ion-img [src]=item.previewURL></ion-img>
               <div class="views-likes">
                 <div class="views">
                   <ion-icon name="eye"></ion-icon>
-                  <span>10000</span>
+                  <span>{{item.views}}</span>
                 </div>
                 <div class="likes">
                   <ion-icon name="heart"></ion-icon>
-                  <span>10000</span>
-                </div>
-              </div>
-            </ion-col>
-            <ion-col size="6" class="post-item">
-              <ion-img src="../../assets/post1.png"></ion-img>
-              <div class="views-likes">
-                <div class="views">
-                  <ion-icon name="eye"></ion-icon>
-                  <span>10000</span>
-                </div>
-                <div class="likes">
-                  <ion-icon name="heart"></ion-icon>
-                  <span>10000</span>
+                  <span>{{item.likes}}</span>
                 </div>
               </div>
             </ion-col>

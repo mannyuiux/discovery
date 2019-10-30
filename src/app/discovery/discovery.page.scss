@@ -56,4 +56,13 @@
       margin-right: 5px;
     }
   }
+  ion-img {
+    height: 115px;
+    object-fit: cover;
+  }
+}
+.wrap-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  height: 14px;
 }

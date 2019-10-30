@@ -1,0 +1,144 @@
+<ion-header translucent>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home" color="light"></ion-back-button>
+    </ion-buttons>
+
+    <ion-title></ion-title>
+
+    <ion-buttons slot="primary">
+      <ion-button>
+        <ion-icon slot="icon-only" color="light" name="help"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-toolbar>
+    <div class="search-box">
+      <ion-tags-input #tagsInput [(ngModel)]="items" (ionFocus)="onFocus($event)" (ionBlur)="onBlur($event)"
+        (onChange)="onChange($event)">
+      </ion-tags-input>
+      <ion-icon name="search"></ion-icon>
+    </div>
+    <ion-title size="small" class="suggestion-title">You may also search for</ion-title>
+    <ion-slides scrollbar="true" pager="false" [options]="slideOpts">
+      <ion-slide>
+        <ion-chip class="suggestions">
+          <ion-label color="dark">#flatshoes</ion-label>
+          <ion-label color="dark">16k posts</ion-label>
+        </ion-chip>
+      </ion-slide>
+      <ion-slide>
+        <ion-chip class="suggestions">
+          <ion-label color="dark">#heels</ion-label>
+          <ion-label color="dark">16k posts</ion-label>
+        </ion-chip>
+      </ion-slide>
+      <ion-slide>
+        <ion-chip class="suggestions">
+          <ion-label color="dark">#redshoes</ion-label>
+          <ion-label color="dark">16k posts</ion-label>
+        </ion-chip>
+      </ion-slide>
+      <ion-slide>
+        <ion-chip class="suggestions">
+          <ion-label color="dark">#sportshoes</ion-label>
+          <ion-label color="dark">16k posts</ion-label>
+        </ion-chip>
+      </ion-slide>
+    </ion-slides>
+    <ion-grid>
+      <ion-row class="ion-text-center analytics-data">
+        <ion-col>
+          <ion-title>200K</ion-title>
+          <p>Number of people talking about #fashion, #shoes</p>
+        </ion-col>
+        <ion-col>
+          <ion-title>20K</ion-title>
+          <p>Number of kofluence influencers talking about #fashion, #shoes</p>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <ion-segment (ionChange)="segmentChanged($event)" class="postsList" [(ngModel)]="postsList" mode="md"
+      color="warning">
+      <ion-segment-button checked mode="md" value="topPosts">
+        Top Posts
+      </ion-segment-button>
+      <ion-segment-button mode="md" value="latestPosts">
+        Latest Posts
+      </ion-segment-button>
+    </ion-segment>
+    <div [ngSwitch]="postsList">
+      <ion-list *ngSwitchCase="'topPosts'">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6" class="post-item">
+              <ion-img src="../../assets/post1.png"></ion-img>
+              <div class="views-likes">
+                <div class="views">
+                  <ion-icon name="eye"></ion-icon>
+                  <span>10000</span>
+                </div>
+                <div class="likes">
+                  <ion-icon name="heart"></ion-icon>
+                  <span>10000</span>
+                </div>
+              </div>
+            </ion-col>
+            <ion-col size="6" class="post-item">
+              <ion-img src="../../assets/post1.png"></ion-img>
+              <div class="views-likes">
+                <div class="views">
+                  <ion-icon name="eye"></ion-icon>
+                  <span>10000</span>
+                </div>
+                <div class="likes">
+                  <ion-icon name="heart"></ion-icon>
+                  <span>10000</span>
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+      <ion-list *ngSwitchCase="'latestPosts'">
+        <ion-grid>
+          <ion-row>
+            <ion-col size="6" class="post-item">
+              <ion-img src="../../assets/post1.png"></ion-img>
+              <div class="views-likes">
+                <div class="views">
+                  <ion-icon name="eye"></ion-icon>
+                  <span>10000</span>
+                </div>
+                <div class="likes">
+                  <ion-icon name="heart"></ion-icon>
+                  <span>10000</span>
+                </div>
+              </div>
+            </ion-col>
+            <ion-col size="6" class="post-item">
+              <ion-img src="../../assets/post1.png"></ion-img>
+              <div class="views-likes">
+                <div class="views">
+                  <ion-icon name="eye"></ion-icon>
+                  <span>10000</span>
+                </div>
+                <div class="likes">
+                  <ion-icon name="heart"></ion-icon>
+                  <span>10000</span>
+                </div>
+              </div>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </ion-list>
+    </div>
+
+  </ion-toolbar>
+  <ion-fab vertical="bottom" class="cta-btn" horizontal="center" slot="fixed">
+    <ion-fab-button>Start A Campaign</ion-fab-button>
+  </ion-fab>
+</ion-content>

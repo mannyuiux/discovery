@@ -25,7 +25,7 @@
     <div class="update-box">
 
     </div>
-    <ion-title size="small" class="suggestion-title">You may also search for</ion-title>
+    <ion-title size="small" class="suggestion-title" mode="md">You may also search for</ion-title>
     <ion-slides scrollbar="true" pager="false" [options]="slideOpts">
       <ion-slide *ngFor="let item of latestResults; let i=index">
         <ion-chip class="suggestions" *ngIf="i<4">

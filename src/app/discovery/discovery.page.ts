@@ -43,17 +43,15 @@ export class DiscoveryPage implements OnInit {
     slidesPerView: 4,
     scrollbar: true,
   };
-  segmentChanged(ev: any) {
-    //ev.detail.value;
-  }
   constructor(private tagSearchService: TagSearchService) {
   }
   ngOnInit() {
     this.searchChanged(this.items);
   }
   searchChanged(items) {
-    this.results = this.tagSearchService.searchData(items[0]);
-    // console.log(this.results.subscribe((results) => console.log(results)));
+    for (var i = 0; i < items.length; i++) {
+      this.results = this.tagSearchService.searchData(items[i]);
+    }
     this.results.subscribe((results) => {
       results.sort((a, b) => {
         return a.id < b.id ? 1 : -1;
